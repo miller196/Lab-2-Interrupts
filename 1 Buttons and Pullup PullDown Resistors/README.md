@@ -99,3 +99,9 @@ The second is out of the And gate in out to the **P1 Interrupt** signal. This is
 Now that we have an interrupt generated, the CPU needs to handle it. First, the **GIE** General Interrupt Enable bit in the processor needs to be set before the interrupt happens so that it is actually able to be notified of the interrupt.
 
 ![Interrupt Handeling CPU](https://i.gyazo.com/6d797c228213079c569e93a2492b6d37.png)
+
+Essentially:
+- The CPU stops what it is doing, stores what instruction it was on.
+- The CPU then loads in a **function pointer** which points to a routine or function to run when that specific interrupt happens.
+- The CPU then runs that function.
+- The last instruction in the function will be a return which will load the stack pointer and program counter back to the CPU and it will resume normal operations.
