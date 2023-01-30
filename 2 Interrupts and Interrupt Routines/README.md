@@ -105,3 +105,24 @@ Essentially:
 - The CPU then loads in a **function pointer** which points to a routine or function to run when that specific interrupt happens.
 - The CPU then runs that function.
 - The last instruction in the function will be a return which will load the stack pointer and program counter back to the CPU and it will resume normal operations.
+
+# Example Code - Part2.c
+You will need to import and link the Part2.c file into your project for Lab 2, **AND MAKE SURE TO RIGHT CLICK ON PART1.c AND REMOVE FROM BUILD**. If you do not remove Part1.c from your build, you will get errors.
+
+## Pragma Vector
+Ok, what is going on here?
+```c
+#pragma vector=PORT2_VECTOR
+__interrupt void Port_2(void)
+{
+    // @TODO You might need to modify this based on your approach to the lab
+    P2IFG &= ~BIT3;                         // Clear P1.3 IFG
+    ToggleEnable ^= 0x01;                   // Enable if the toggle should be active
+}
+```
+First, **#pragma** is a compiler define, which basically means that the compiler is going to treat this as a special thing.
+
+Second, **__interrupt void Port_2(void)**, the **__interrupt** is telling the compiler this function is actually an interrupt function. But let me make this clear, *this is itself a function!*. You are creating the function which needs to run whenever the interrupt condition happens. Formally, this is so that we can create a function pointer which allows the processor to actually point to the instructions for the function.
+
+## Task
+You will need to modify the code to make it where when the button is pressed it changes between the Red LED and Green LED that is blinking. You will have some TODO statements that will lead your towards the things that might need to be changed. You need to push an updated version of the code with the functionality.
