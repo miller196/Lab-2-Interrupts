@@ -7,7 +7,11 @@
  *
  *      This example will show you how to configure an Interrupt and Interrupt Service Routine.
  *
- *      Your task for this lab is to change which LED each time the button has been pressed. For example, this starts blinking the Red LED, and then when the button is pressed, it should move to the Green LED. If the button is pressed again, it should move to the Red LED again.
+ *      Your task for this lab is to change which LED each time the button has been pressed.
+ *      For example, this starts blinking the Red LED, and then when the button is pressed,
+ *      it should move to the Green LED. If the button is pressed again, it should move to the Red LED again.
+ *
+ *      There have been some "todo" notes which can be helpful in finding things to change in the code.
  */
 
 
@@ -40,6 +44,7 @@ int main(void)
 
     while(1)
     {
+        // @TODO You will need to modify this code to change between blinking the Red LED or the Green LED
         if (ToggleEnable)
             P1OUT ^= BIT0;                  // P1.0 = toggle
         else
@@ -52,6 +57,7 @@ int main(void)
 #pragma vector=PORT2_VECTOR
 __interrupt void Port_2(void)
 {
+    // @TODO You might need to modify this based on your approach to the lab
     P2IFG &= ~BIT3;                         // Clear P1.3 IFG
     ToggleEnable ^= 0x01;                   // Enable if the toggle should be active
 }
